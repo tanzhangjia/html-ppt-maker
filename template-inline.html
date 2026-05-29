@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>PPT风格 · 白底精致</title>
+<style>
+/* ========== 全局 ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;color:#1e293b;padding:40px 0}
+.slide{width:1024px;min-height:576px;margin:28px auto;background:#fff;border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,0.04),0 8px 32px rgba(0,0,0,0.04);display:flex;flex-direction:column;position:relative;overflow:hidden;padding:44px 56px 40px}
+.page-num{position:absolute;bottom:16px;right:28px;font-size:12px;color:#94a3b8;font-weight:500}
+/* ========== 封面 ========== */
+.cover{background:linear-gradient(135deg,#0f172a,#1e3a5f,#3b82f6);justify-content:center;align-items:center;text-align:center;color:#fff;padding:60px;border-radius:16px}
+.cover h1{font-size:52px;font-weight:800;margin-bottom:14px;color:#fff;letter-spacing:2px}
+.cover .sub{font-size:20px;color:rgba(255,255,255,0.5);margin-bottom:30px;letter-spacing:6px;font-weight:300}
+.cover .tag{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:6px 28px;border-radius:20px;font-size:13px;color:rgba(255,255,255,0.6)}
+/* ========== 正文 ========== */
+h2{font-size:30px;font-weight:700;color:#0f172a;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.section-title{font-size:13px;font-weight:600;color:#3b82f6;letter-spacing:3px;margin-bottom:6px;text-transform:uppercase}
+p{font-size:17px;line-height:1.8;color:#475569;margin-bottom:8px}
+ul{padding-left:22px;margin-bottom:8px}
+li{font-size:16px;line-height:1.7;color:#475569;margin-bottom:4px}
+.hl{color:#2563eb;font-weight:600}
+/* ========== 网格 ========== */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;align-content:center}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;flex:1;align-content:center}
+/* ========== 卡片（精致版） ========== */
+.card{background:#fff;border:1px solid #e9edf2;border-radius:12px;padding:24px;position:relative;overflow:hidden;transition:box-shadow 0.2s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06)}
+/* 每张卡片顶部彩条 —— 用 class 控制颜色 */
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.card.blue::before{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.card.green::before{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.card.orange::before{background:linear-gradient(90deg,#f97316,#fb923c)}
+.card.purple::before{background:linear-gradient(90deg,#8b5cf6,#a78bfa)}
+.card.pink::before{background:linear-gradient(90deg,#ec4899,#f472b6)}
+.card.teal::before{background:linear-gradient(90deg,#14b8a6,#2dd4bf)}
+.card.rose::before{background:linear-gradient(90deg,#e11d48,#fb7185)}
+.card.amber::before{background:linear-gradient(90deg,#d97706,#fbbf24)}
+.card.indigo::before{background:linear-gradient(90deg,#4f46e5,#818cf8)}
+/* 卡片内部 */
+.card h4{font-size:17px;font-weight:600;color:#0f172a;margin-bottom:6px}
+.card p{font-size:15px;color:#475569;line-height:1.6;margin-bottom:0}
+.card .icon{font-size:28px;margin-bottom:8px;display:block}
+.card ul{margin-bottom:0}
+.card li{font-size:14px;color:#475569}
+/* ========== 大数字 ========== */
+.big-num{font-size:48px;font-weight:800;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;display:inline-block}
+/* ========== 流程图 ========== */
+.flow{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0;flex-wrap:wrap}
+.flow-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 22px;font-size:15px;color:#1e293b;text-align:center;min-width:100px;font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.flow-arrow{font-size:18px;color:#94a3b8;font-weight:300}
+/* ========== TOC 卡片 ========== */
+.toc-card{border-radius:12px;padding:24px;position:relative;overflow:hidden;border:1px solid #e9edf2;cursor:default}
+.toc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.toc-card.blue::before{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.toc-card.green::before{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.toc-card.orange::before{background:linear-gradient(90deg,#f97316,#fb923c)}
+.toc-card.purple::before{background:linear-gradient(90deg,#8b5cf6,#a78bfa)}
+.toc-card.pink::before{background:linear-gradient(90deg,#ec4899,#f472b6)}
+.toc-card.teal::before{background:linear-gradient(90deg,#14b8a6,#2dd4bf)}
+.toc-card .num{font-size:32px;font-weight:800;margin-bottom:4px}
+.toc-card .num.b{color:#3b82f6}.toc-card .num.g{color:#22c55e}.toc-card .num.o{color:#f97316}.toc-card .num.p{color:#8b5cf6}.toc-card .num.pk{color:#ec4899}.toc-card .num.t{color:#14b8a6}
+.toc-card h4{font-size:17px;font-weight:600;color:#0f172a;margin-bottom:2px}
+.toc-card p{font-size:14px;color:#64748b;margin:0}
+/* ========== 代码块样式（放prompt示例） ========== */
+.code-block{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 16px;font-family:ui-monospace,SFMono-Regular,monospace;font-size:13px;color:#475569;line-height:1.7;margin:8px 0}
+/* ========== 总结框 ========== */
+.summary-box{background:linear-gradient(135deg,#eff6ff,#fafcff);border:1px solid #bfdbfe;border-radius:14px;padding:28px}
+.summary-box p{font-size:16px;margin-bottom:4px}
+/* ========== 响应式 ========== */
+@media(max-width:1060px){.slide{width:95vw;min-height:auto;padding:36px 24px 40px}.two-col,.three-col{grid-template-columns:1fr;gap:12px}}
+</style>
+</head><body>
+
+<!-- 封面 -->
+<div class="slide cover"><span class="page-num" style="color:rgba(255,255,255,0.2);">1</span>
+  <h1>主 标 题</h1>
+  <p class="sub">副标题描述文字</p>
+  <span class="tag">标签</span>
+</div>
+
+<!-- 目录页：2列×3行彩色卡片 -->
+<div class="slide" style="justify-content:center;"><span class="page-num">2</span>
+  <p class="section-title" style="text-align:center;">CONTENTS</p>
+  <h2 style="text-align:center;border:none;margin-bottom:24px;">目 录</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:700px;margin:0 auto;width:100%;">
+    <div class="toc-card blue"><div class="num b">01</div><h4>章节名称</h4><p>描述文字</p></div>
+    <div class="toc-card green"><div class="num g">02</div><h4>章节名称</h4><p>描述文字</p></div>
+    <div class="toc-card orange"><div class="num o">03</div><h4>章节名称</h4><p>描述文字</p></div>
+    <div class="toc-card purple"><div class="num p">04</div><h4>章节名称</h4><p>描述文字</p></div>
+    <div class="toc-card pink"><div class="num pk">05</div><h4>章节名称</h4><p>描述文字</p></div>
+    <div class="toc-card teal"><div class="num t">06</div><h4>章节名称</h4><p>描述文字</p></div>
+  </div>
+</div>
+
+<!-- 双栏内容页 -->
+<div class="slide"><span class="page-num">3</span>
+  <p class="section-title">CHAPTER 01</p>
+  <h2>双栏 · 卡片彩条</h2>
+  <div class="two-col">
+    <div class="card blue"><div class="icon">🚀</div><h4>标题</h4><p>内容描述。每张卡片顶部有渐变色条区分层级。</p></div>
+    <div class="card orange"><div class="icon">⚡</div><h4>标题</h4><p>内容描述。白色底+浅灰卡片，干净清晰。</p></div>
+  </div>
+</div>
+
+<!-- 三栏内容页 -->
+<div class="slide"><span class="page-num">4</span>
+  <p class="section-title">CHAPTER 02</p>
+  <h2>三栏 · 彩色卡</h2>
+  <div class="three-col">
+    <div class="card blue" style="text-align:center;"><div class="icon">🎨</div><h4>设计</h4><p>描述文字</p></div>
+    <div class="card green" style="text-align:center;"><div class="icon">💻</div><h4>开发</h4><p>描述文字</p></div>
+    <div class="card purple" style="text-align:center;"><div class="icon">📊</div><h4>数据</h4><p>描述文字</p></div>
+  </div>
+</div>
+
+<!-- 流程图 -->
+<div class="slide"><span class="page-num">5</span>
+  <p class="section-title">CHAP 03</p>
+  <h2>流程图</h2>
+  <p>多步骤流程展示</p>
+  <div class="flow">
+    <div class="flow-box">第一步</div><span class="flow-arrow">→</span>
+    <div class="flow-box">第二步</div><span class="flow-arrow">→</span>
+    <div class="flow-box">第三步</div><span class="flow-arrow">→</span>
+    <div class="flow-box">第四步</div>
+  </div>
+  <div class="two-col">
+    <div class="card blue"><h4>说明左</h4><p>内容</p></div>
+    <div class="card orange"><h4>说明右</h4><p>内容</p></div>
+  </div>
+</div>
+
+<!-- 内容+数字 -->
+<div class="slide"><span class="page-num">6</span>
+  <p class="section-title">CHAP 04</p>
+  <h2>大数字 + 对比</h2>
+  <div class="two-col">
+    <div class="card" style="text-align:center;border:1px solid #e2e8f0;"><div style="font-size:13px;color:#94a3b8;margin-bottom:6px;">旧方案</div><div class="big-num" style="font-size:40px;background:linear-gradient(135deg,#f87171,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">2-5天</div></div>
+    <div class="card blue" style="text-align:center;"><div style="font-size:13px;color:#94a3b8;margin-bottom:6px;">新方案</div><div class="big-num" style="font-size:40px;">30min</div></div>
+  </div>
+</div>
+
+<!-- 总结 -->
+<div class="slide" style="justify-content:center;"><span class="page-num">7</span>
+  <p class="section-title" style="text-align:center;">SUMMARY</p>
+  <h2 style="text-align:center;border:none;">总结</h2>
+  <div class="summary-box">
+    <p>关键结论和下一步行动</p>
+  </div>
+  <p style="text-align:center;margin-top:16px;color:#94a3b8;font-size:14px;">联系 · 交流</p>
+</div>
+
+</body></html>
